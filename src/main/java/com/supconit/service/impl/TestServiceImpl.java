@@ -1,6 +1,11 @@
 package com.supconit.service.impl;
 
+import com.supconit.domain.TestDo;
+import com.supconit.mapper.TestMapper;
 import com.supconit.service.TestService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @Author: chenxuankai
@@ -8,5 +13,14 @@ import com.supconit.service.TestService;
  * @Description:
  * @Version: 1.0.0
  */
+@Service("testService")
 public class TestServiceImpl implements TestService {
+
+    @Resource
+    private TestMapper testMapper;
+
+    @Override
+    public Integer insert(TestDo testDo) {
+        return testMapper.insert(testDo);
+    }
 }
