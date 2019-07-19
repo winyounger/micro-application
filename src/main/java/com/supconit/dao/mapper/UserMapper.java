@@ -1,6 +1,6 @@
-package com.supconit.mapper;
+package com.supconit.dao.mapper;
 
-import com.supconit.domain.dto.UserDto;
+import com.supconit.dao.dto.UserDto;
 import org.apache.ibatis.annotations.Param;
 
 /**

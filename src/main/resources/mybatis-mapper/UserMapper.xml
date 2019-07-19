@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://hc.supconit.com/mybatis-3-mapper.dtd">
-<mapper namespace="com.supconit.mapper.UserMapper">
+<mapper namespace="com.supconit.dao.mapper.UserMapper">
 
 
     <select id="getUserByWechatOpenid" parameterType="java.lang.String" resultType="UserDto">

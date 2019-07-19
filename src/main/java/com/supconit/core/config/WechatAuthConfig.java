@@ -1,4 +1,4 @@
-package com.supconit.common.config;
+package com.supconit.core.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,6 +1,5 @@
-package com.supconit.domain.po;
+package com.supconit.dao.domain;
 
-import com.supconit.common.enums.Gender;
 import lombok.Data;
 
 /**
@@ -10,7 +9,7 @@ import lombok.Data;
  * @Version: 1.0.0
  */
 @Data
-public class UserPo {
+public class UserDo {
 
     private Long id;
     private String username;

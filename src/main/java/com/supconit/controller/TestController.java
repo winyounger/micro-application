@@ -1,13 +1,11 @@
 package com.supconit.controller;
 
-import com.supconit.domain.TestDo;
+import com.supconit.dao.TestDo;
 import com.supconit.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * @Author: chenxuankai

@@ -1,7 +1,7 @@
 package com.supconit.service.impl;
 
-import com.supconit.domain.TestDo;
-import com.supconit.mapper.TestMapper;
+import com.supconit.dao.TestDo;
+import com.supconit.dao.mapper.TestMapper;
 import com.supconit.service.TestService;
 import org.springframework.stereotype.Service;
 

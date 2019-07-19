@@ -1,4 +1,4 @@
-package com.supconit.common.api;
+package com.supconit.core.api;
 
 import lombok.Data;
 

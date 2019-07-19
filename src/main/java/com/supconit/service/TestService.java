@@ -1,6 +1,6 @@
 package com.supconit.service;
 
-import com.supconit.domain.TestDo;
+import com.supconit.dao.TestDo;
 
 /**
  * @Author: chenxuankai

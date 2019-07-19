@@ -1,7 +1,7 @@
-package com.supconit.common.filter;
+package com.supconit.core.filter;
 
-import com.supconit.common.config.AppContext;
-import com.supconit.common.util.TokenUtils;
+import com.supconit.core.config.AppContext;
+import com.supconit.core.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

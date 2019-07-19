@@ -1,4 +1,4 @@
-package com.supconit.common.util;
+package com.supconit.core.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

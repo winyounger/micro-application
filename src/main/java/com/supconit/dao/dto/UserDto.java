@@ -1,4 +1,4 @@
-package com.supconit.domain.dto;
+package com.supconit.dao.dto;
 
 import lombok.Data;
 

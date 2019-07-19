@@ -1,4 +1,4 @@
-package com.supconit.common.enums;
+package com.supconit.core.enums;
 
 /**
  * @Author: chenxuankai

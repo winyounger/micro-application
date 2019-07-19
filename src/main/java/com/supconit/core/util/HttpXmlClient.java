@@ -1,4 +1,4 @@
-package com.supconit.common.util;
+package com.supconit.core.util;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

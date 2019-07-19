@@ -1,7 +1,7 @@
 package com.supconit.service;
 
-import com.supconit.common.api.WechatAuthenticationResponse;
-import com.supconit.domain.dto.UserDto;
+import com.supconit.core.api.WechatAuthenticationResponse;
+import com.supconit.dao.dto.UserDto;
 
 /**
  * @Author: chenxuankai

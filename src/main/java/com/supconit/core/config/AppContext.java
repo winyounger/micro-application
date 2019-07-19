@@ -1,4 +1,4 @@
-package com.supconit.common.config;
+package com.supconit.core.config;
 
 /**
  * @Author: chenxuankai

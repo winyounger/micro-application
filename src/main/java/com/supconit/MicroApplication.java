@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(value = "com.supconit.mapper")
+@MapperScan(value = "com.supconit.domain.mapper")
 public class MicroApplication {
 
     public static void main(String[] args) {

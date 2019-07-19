@@ -1,6 +1,6 @@
-package com.supconit.common.config;
+package com.supconit.core.config;
 
-import com.supconit.common.filter.ThirdSessionAuthFilter;
+import com.supconit.core.filter.ThirdSessionAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

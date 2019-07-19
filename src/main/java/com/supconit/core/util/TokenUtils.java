@@ -1,4 +1,4 @@
-package com.supconit.common.util;
+package com.supconit.core.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

@@ -1,4 +1,4 @@
-package com.supconit.common.util;
+package com.supconit.core.util;
 
 
 import com.alibaba.fastjson.JSONObject;

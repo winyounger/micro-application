@@ -1,8 +1,8 @@
 package com.supconit.controller;
 
-import com.supconit.common.api.WechatAuthenticationResponse;
-import com.supconit.domain.dto.UserDto;
-import com.supconit.domain.po.UserPo;
+import com.supconit.core.api.WechatAuthenticationResponse;
+import com.supconit.dao.dto.UserDto;
+import com.supconit.dao.domain.UserDo;
 import com.supconit.service.WechatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,8 +41,8 @@ public class AuthEndpointController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<WechatAuthenticationResponse> createAuthenticationToken(@RequestBody UserPo userPo) throws Exception {
-        WechatAuthenticationResponse jwtResponse = wechatService.wechatLogin(userPo.getCode());
+    public ResponseEntity<WechatAuthenticationResponse> createAuthenticationToken(@RequestBody UserDo userDo) throws Exception {
+        WechatAuthenticationResponse jwtResponse = wechatService.wechatLogin(userDo.getCode());
         return ResponseEntity.ok(jwtResponse);
     }
 

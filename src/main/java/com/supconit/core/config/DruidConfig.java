@@ -1,4 +1,4 @@
-package com.supconit.common.config;
+package com.supconit.core.config;
 
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.filter.stat.StatFilter;

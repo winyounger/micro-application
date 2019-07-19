@@ -1,6 +1,6 @@
-package com.supconit.mapper;
+package com.supconit.dao.mapper;
 
-import com.supconit.domain.TestDo;
+import com.supconit.dao.TestDo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
