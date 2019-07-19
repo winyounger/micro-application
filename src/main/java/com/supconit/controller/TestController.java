@@ -25,7 +25,7 @@ public class TestController {
     @GetMapping("/insert")
     public void insert() {
         TestDo testDo = new TestDo();
-        testDo.setName("增阿牛");
+        testDo.setName("张无忌");
         Integer num = testService.insert(testDo);
     }
 

@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +38,7 @@ public class ThirdSessionAuthFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader(this.tokenHeader);
         //如果请求路径为微信通知后台支付结果则不需要token（之后会在具体的controller中，对双方签名进行验证防钓鱼）
         String url = request.getRequestURI().substring(request.getContextPath().length());
-        if (url.equals("/auth") || url.equals("/test")) {
+        if (url.equals("/auth") || url.equals("/test") || url.contains("/test")) {
             chain.doFilter(request, response);
             return;
         }
