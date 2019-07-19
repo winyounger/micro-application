@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://hc.supconit.com/mybatis-3-mapper.dtd">
+<mapper namespace="com.supconit.mapper.UserMapper">
+
+
+    <select id="getUserByWechatOpenid" parameterType="java.lang.String" resultType="UserDto">
+        SELECT * FROM mini_program_user WHERE is_delete = 0 AND wechat_openid = #{wechatOpenid}
+    </select>
+
+    <insert id="insert" parameterType="UserDto" useGeneratedKeys="true" keyColumn="id">
+        INSERT INTO mini_program_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            gmt_create,
+            gmt_modify,
+            is_delete,
+<!--            <if test="updateMillon != null">-->
+<!--                update_millon,-->
+<!--            </if>-->
+            <if test="userName != null and userName != ''">
+                user_name,
+            </if>
+            <if test="password != null and password != ''">
+                password,
+            </if>
+            <if test="wechatOpenid != null and wechatOpenid != ''">
+                wechat_openid,
+            </if>
+            <if test="phone != null and phone != ''">
+                phone,
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nick_name,
+            </if>
+            <if test="genderValue != null">
+                gender_value,
+            </if>
+            <if test="email != null and email != ''">
+                email,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            NOW(),
+            NOW(),
+            0,
+<!--            <if test="updateMillon != null">-->
+<!--                #{updateMillon},-->
+<!--            </if>-->
+            <if test="userName != null and userName != ''">
+                #{userName},
+            </if>
+            <if test="password != null and password != ''">
+                #{password},
+            </if>
+            <if test="wechatOpenid != null and wechatOpenid != ''">
+                #{wechatOpenid},
+            </if>
+            <if test="phone != null and phone != ''">
+                #{phone},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                #{nickName},
+            </if>
+            <if test="genderValue != null">
+                #{genderValue},
+            </if>
+            <if test="email != null and email != ''">
+                #{email},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="UserDto">
+        UPDATE mini_program_user
+        SET
+        <if test="updateMillon != null">
+            update_millon = #{updateMillon},
+        </if>
+        <if test="userName != null and userName != ''">
+            user_name = #{userName},
+        </if>
+        <if test="password != null and password != ''">
+            password = #{password},
+        </if>
+        <if test="wechatOpenid != null and wechatOpenid != ''">
+            wechat_openid = #{wechatOpenid},
+        </if>
+        <if test="phone != null and phone != ''">
+            phone = #{phone},
+        </if>
+        <if test="nickName != null and nickName != ''">
+            nick_name = #{nickName},
+        </if>
+        <if test="genderValue != null">
+            gender_value = #{genderValue},
+        </if>
+        <if test="email != null and email != ''">
+            email = #{email},
+        </if>
+        gmt_modify = NOW()
+        WHERE is_delete = 0 AND id = #{id}
+    </update>
+
+</mapper>

@@ -5,21 +5,27 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 
 /**
@@ -32,6 +38,9 @@ import java.util.Map;
 public class DruidConfig {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private Environment env;
 
     @NotNull
     @Value("${spring.datasource.dynamic.datasource.master.driver-class-name}")
@@ -92,33 +101,33 @@ public class DruidConfig {
         return dataSource;
     }
 
-//    /**
-//     * 配置事务
-//     * @param dataSource
-//     * @return
-//     */
-//    @Bean
-//    public DataSourceTransactionManager transactionManager(DataSource dataSource){
-//        return new DataSourceTransactionManager(dataSource);
-//    }
-//
-//    /**
-//     * 配置分页插件
-//     * @return
-//     */
-//    @Bean
-//    public PageInterceptor pageHelper(){
-//        PageInterceptor pageHelper = new PageInterceptor();
-//        Properties properties = new Properties();
-//        properties.setProperty("offsetAsPageNum", "true");
-//        properties.setProperty("rowBoundsWithCount", "true");
-//        properties.setProperty("reasonable", "true");
-//        properties.setProperty("supportMethodsArguments", "true");
-//        properties.setProperty("returnPageInfo", "check");
-//        properties.setProperty("params", "count=countSql");
-//        pageHelper.setProperties(properties);
-//        return pageHelper;
-//    }
+    /**
+     * 配置事务
+     * @param dataSource
+     * @return
+     */
+    @Bean
+    public DataSourceTransactionManager transactionManager(DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
+    }
+
+    /**
+     * 配置分页插件
+     * @return
+     */
+    @Bean
+    public PageInterceptor pageHelper(){
+        PageInterceptor pageHelper = new PageInterceptor();
+        Properties properties = new Properties();
+        properties.setProperty("offsetAsPageNum", "true");
+        properties.setProperty("rowBoundsWithCount", "true");
+        properties.setProperty("reasonable", "true");
+        properties.setProperty("supportMethodsArguments", "true");
+        properties.setProperty("returnPageInfo", "check");
+        properties.setProperty("params", "count=countSql");
+        pageHelper.setProperties(properties);
+        return pageHelper;
+    }
 
     //    配置servlet
     @Bean
@@ -135,29 +144,29 @@ public class DruidConfig {
         return bean;
     }
 
-//    /**
-//     * 配置sqlSessionFactory
-//     * @param dataSource
-//     * @return
-//     * @throws Exception
-//     */
-//    @Bean
-//    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource, PageInterceptor pageHelper){
-//        SqlSessionFactoryBean sqlSessionFactory =  new SqlSessionFactoryBean();
-//        try {
-//            sqlSessionFactory.setDataSource(dataSource);
-//            sqlSessionFactory.setTypeAliasesPackage(env.getProperty("mybatis.aliasesPackage"));
-//            sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
-//            sqlSessionFactory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource(env.getProperty("mybatis.config-location")));
-//            //设置分页插件
-//            sqlSessionFactory.setPlugins(new Interceptor[]{pageHelper,new CatMybatisInterceptor(AesUtil.decrypt(url,aesPassword))});
-//            sqlSessionFactory.setVfs(SpringBootVFS.class);
-//        } catch (IOException e) {
-//            logger.error("sqlSessionFactory,e={}",e);
-//        }
-//        return sqlSessionFactory;
-//
-//    }
+    /**
+     * 配置sqlSessionFactory
+     * @param dataSource
+     * @return
+     * @throws Exception
+     */
+    @Bean
+    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource, PageInterceptor pageHelper){
+        SqlSessionFactoryBean sqlSessionFactory =  new SqlSessionFactoryBean();
+        try {
+            sqlSessionFactory.setDataSource(dataSource);
+            sqlSessionFactory.setTypeAliasesPackage(env.getProperty("mybatis.aliasesPackage"));
+            sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
+            sqlSessionFactory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource(env.getProperty("mybatis.config-location")));
+            //设置分页插件
+            sqlSessionFactory.setPlugins(new Interceptor[]{pageHelper});//设置分页插件
+            sqlSessionFactory.setVfs(SpringBootVFS.class);
+        } catch (IOException e) {
+            logger.error("sqlSessionFactory,e={}",e);
+        }
+        return sqlSessionFactory;
+
+    }
 
     //    配置filter
     @Bean
