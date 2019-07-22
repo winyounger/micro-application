@@ -11,10 +11,10 @@ import lombok.Data;
 @Data
 public class WechatAuthCodeResponse {
 
-    private String errorCode;
-    private String errorMsg;
+    private String errorcode;
+    private String errmsg;
     private Integer expireTime;
     private String openid;
-    private String sessionKey;
+    private String session_key;
 
 }

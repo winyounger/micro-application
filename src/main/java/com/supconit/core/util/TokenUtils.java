@@ -20,7 +20,7 @@ public class TokenUtils {
     public String TOKEN_SECRET = "micro_app";
     public String TOKEN_ISSUER = "micro";
     public String TOKEN_SUBJECT = "system admin operator";
-    public String TOKEN_CLAIM= "user_name";
+    public String TOKEN_CLAIM= "openid";
 
 
     public String createToken(String openid,Date expiresAt) throws Exception{

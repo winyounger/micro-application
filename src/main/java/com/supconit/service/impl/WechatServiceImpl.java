@@ -51,10 +51,10 @@ public class WechatServiceImpl implements WechatService {
     public WechatAuthenticationResponse wechatLogin(String code) throws Exception {
         WechatAuthCodeResponse response = getWxSession(code);
         String wxOpenId = response.getOpenid();
-        String wxSessionKey = response.getSessionKey();
+        String wxSessionKey = response.getSession_key();
         UserDto userDto = new UserDto();
         userDto.setWechatOpenid(wxOpenId);
-        loginOrRegisterConsumer(userDto);
+//        loginOrRegisterConsumer(userDto);
         Integer expires = response.getExpireTime();
         String thirdSession = create3rdSession(wxOpenId, wxSessionKey, expires,userDto);
         return new WechatAuthenticationResponse(thirdSession);
@@ -83,8 +83,8 @@ public class WechatServiceImpl implements WechatService {
         if (null == res) {
             throw new RuntimeException("调用微信接口失败");
         }
-        if (res.getErrorCode() != null) {
-            throw new RuntimeException(res.getErrorMsg());
+        if (res.getErrorcode() != null) {
+            throw new RuntimeException(res.getErrmsg());
         }
         res.setExpireTime(res.getExpireTime() != null ? res.getExpireTime() : EXPIRES);
         return res;
