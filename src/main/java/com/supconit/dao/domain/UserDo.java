@@ -12,10 +12,11 @@ import lombok.Data;
 public class UserDo {
 
     private Long id;
-    private String username;
-    private Long phone;
-    private Integer genderValue;
-    private String vcode;
+    private String userName;
+    private Long mobile;
+    private String avatar;
+    private Integer sex;
+    private String openId;
     private String password;
     private String promotionCode;
     private String InvitationCode;

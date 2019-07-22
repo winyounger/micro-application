@@ -1,5 +1,6 @@
 package com.supconit.service.impl;
 
+import com.supconit.dao.domain.UserDo;
 import com.supconit.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +14,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
 
-
+    @Override
+    public UserDo getUserById() {
+        return null;
+    }
 }
