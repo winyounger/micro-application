@@ -4,11 +4,11 @@
 
 
     <select id="getUserByWechatOpenid" parameterType="java.lang.String" resultType="UserDto">
-        SELECT * FROM mini_program_user WHERE is_delete = 0 AND wechat_openid = #{wechatOpenid}
+        SELECT * FROM user WHERE is_delete = 0 AND openid = #{wechatOpenid}
     </select>
 
     <insert id="insert" parameterType="UserDto" useGeneratedKeys="true" keyColumn="id">
-        INSERT INTO mini_program_user
+        INSERT INTO user
         <trim prefix="(" suffix=")" suffixOverrides="," >
             gmt_create,
             gmt_modify,
@@ -23,7 +23,7 @@
                 password,
             </if>
             <if test="wechatOpenid != null and wechatOpenid != ''">
-                wechat_openid,
+                openid,
             </if>
             <if test="phone != null and phone != ''">
                 phone,
@@ -70,7 +70,7 @@
     </insert>
 
     <update id="updateById" parameterType="UserDto">
-        UPDATE mini_program_user
+        UPDATE user
         SET
         <if test="updateMillon != null">
             update_millon = #{updateMillon},
@@ -82,7 +82,7 @@
             password = #{password},
         </if>
         <if test="wechatOpenid != null and wechatOpenid != ''">
-            wechat_openid = #{wechatOpenid},
+            openid = #{wechatOpenid},
         </if>
         <if test="phone != null and phone != ''">
             phone = #{phone},
