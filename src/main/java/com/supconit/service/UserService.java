@@ -1,5 +1,6 @@
 package com.supconit.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.supconit.dao.domain.UserDo;
 
 /**
@@ -8,6 +9,6 @@ import com.supconit.dao.domain.UserDo;
  * @Description:
  * @Version: 1.0.0
  */
-public interface UserService {
-    UserDo getUserById();
+public interface UserService extends IService<UserDo> {
+    UserDo getUserById(Long userId);
 }
