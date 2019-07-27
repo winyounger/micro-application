@@ -79,7 +79,7 @@ public class WechatServiceImpl implements WechatService {
             res = null;
             logger.error("反序列化失败", e);
         }
-        logger.info(response);
+        logger.info("wx response:",response);
         if (null == res) {
             throw new RuntimeException("调用微信接口失败");
         }
