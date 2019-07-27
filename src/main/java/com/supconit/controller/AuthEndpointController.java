@@ -46,7 +46,7 @@ public class AuthEndpointController {
 
     @PostMapping("/updateConsumerInfo")
     public void updateConsumerInfo(@RequestBody UserDto userDto) {
-        wechatService.updateConsumerInfo(userDto);
+//        wechatService.updateConsumerInfo(userDto);
     }
 
 }

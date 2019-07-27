@@ -95,7 +95,7 @@ public class WechatServiceImpl implements WechatService {
         StringBuffer sb = new StringBuffer();
         sb.append(wxSessionKey).append("#").append(wxOpenId);
 //        stringRedisTemplate.opsForValue().set(thirdSessionKey, sb.toString(), expires, TimeUnit.SECONDS);
-        String thirdSessionKey = tokenUtils.createToken(wxOpenId, DateUtil.addDays(new Date(), expires));
+        String thirdSessionKey = tokenUtils.createToken(wxOpenId,userDto.getId(),userDto.getUserName(), DateUtil.addDays(new Date(), expires));
         return thirdSessionKey;
     }
 
