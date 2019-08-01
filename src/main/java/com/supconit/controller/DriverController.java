@@ -42,7 +42,10 @@ public class DriverController {
     public AjaxMessage creatDriver(@RequestBody CommonQuery commonQuery) {
         Long userId = commonQuery.getUserId();
         UserDo userDo = userService.getUserById(userId);
-
+        if(userDo == null){
+            return AjaxMessage.error();
+        }
+        driverService.creatDriver(commonQuery);
         return AjaxMessage.success();
     }
 
