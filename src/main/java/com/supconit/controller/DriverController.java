@@ -11,6 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.TimeUnit;
+import com.supconit.dao.domain.PublishMsg;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author: chenxuankai
@@ -26,12 +31,19 @@ public class DriverController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 司机发布信息接口
+     * */
+    @PostMapping("/publishMsg")
+    public void publishMsg(@RequestBody PublishMsg publishMsg) {
+        System.out.println(publishMsg);
+    }
     @PostMapping("/creatDriver")
     public AjaxMessage creatDriver(@RequestBody CommonQuery commonQuery) {
         Long userId = commonQuery.getUserId();
         UserDo userDo = userService.getUserById(userId);
 
-        return ResponseEntity.ok(jwtResponse);
+        return AjaxMessage.success();
     }
 
 }
