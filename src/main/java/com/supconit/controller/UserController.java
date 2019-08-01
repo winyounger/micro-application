@@ -1,6 +1,7 @@
 package com.supconit.controller;
 
 
+import com.supconit.core.response.HandleResponse;
 import com.supconit.core.util.TokenUtils;
 import com.supconit.dao.TestDo;
 import com.supconit.dao.domain.UserDo;
@@ -32,10 +33,11 @@ public class UserController {
     @Autowired
     private TokenUtils tokenUtils;
     @GetMapping("/getUserInfo")
-    public void getUserInfo(@RequestParam String token) {
+    public HandleResponse getUserInfo(@RequestParam String token) {
         Long userId = tokenUtils.getUserId(token);
         UserDo userDo = userService.getUserById(userId);
-        redisTemplate.opsForValue().set("ww","22222");
-        redisTemplate.expire("ww",1l, TimeUnit.MINUTES);
+        //redisTemplate.opsForValue().set("ww","22222");
+        //redisTemplate.expire("ww",1l, TimeUnit.MINUTES);
+        return HandleResponse.successResponse(userDo);
     }
 }
