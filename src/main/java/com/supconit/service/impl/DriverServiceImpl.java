@@ -7,7 +7,9 @@ import com.supconit.dao.mapper.DriverMapper;
 import com.supconit.dao.mapper.UserMapper;
 import com.supconit.query.CommonQuery;
 import com.supconit.service.DriverService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DriverServiceImpl extends ServiceImpl<DriverMapper, DriverDo> implements DriverService {
     @Override
     public int creatDriver(CommonQuery commonQuery) {
