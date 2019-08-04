@@ -25,5 +25,5 @@ public interface UserMapper extends BaseMapper<UserDo> {
 
     Integer insert(UserDto userDto);
 
-    void updateById(UserDto userDoExist);
+    void updateById(UserDto userDto);
 }

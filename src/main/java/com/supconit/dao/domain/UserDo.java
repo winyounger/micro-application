@@ -13,8 +13,8 @@ public class UserDo {
 
     private Long id;
     private Integer isDelete;
-    private Data gmtCreate;
-    private Data gmtModify;
+    private String gmtCreate;
+    private String gmtModify;
     private String creater;
     private String modifier;
     private String userName;
