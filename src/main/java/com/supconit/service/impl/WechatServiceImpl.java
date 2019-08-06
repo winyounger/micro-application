@@ -2,8 +2,8 @@ package com.supconit.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
+import com.supconit.core.api.ResponseData;
 import com.supconit.core.api.WechatAuthCodeResponse;
-import com.supconit.core.api.WechatAuthenticationResponse;
 import com.supconit.core.config.AppContext;
 import com.supconit.core.config.WechatAuthConfig;
 import com.supconit.core.util.DateUtil;
@@ -13,7 +13,6 @@ import com.supconit.dao.mapper.UserMapper;
 import com.supconit.service.WechatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,16 +47,16 @@ public class WechatServiceImpl implements WechatService {
 
     @Override
     @Transactional
-    public WechatAuthenticationResponse wechatLogin(String code) throws Exception {
+    public ResponseData wechatLogin(String code) throws Exception {
         WechatAuthCodeResponse response = getWxSession(code);
         String wxOpenId = response.getOpenid();
         String wxSessionKey = response.getSession_key();
         UserDto userDto = new UserDto();
-        userDto.setWechatOpenid(wxOpenId);
-//        loginOrRegisterConsumer(userDto);
+        userDto.setOpenid(wxOpenId);
+        loginOrRegisterConsumer(userDto);
         Integer expires = response.getExpireTime();
         String thirdSession = create3rdSession(wxOpenId, wxSessionKey, expires,userDto);
-        return new WechatAuthenticationResponse(thirdSession);
+        return new ResponseData(thirdSession);
     }
 
 
@@ -100,7 +99,7 @@ public class WechatServiceImpl implements WechatService {
     }
 
     private void loginOrRegisterConsumer(UserDto userDto) {
-        UserDto userDo = userMapper.getUserByWechatOpenid(userDto.getWechatOpenid());
+        UserDto userDo = userMapper.getUserByWechatOpenid(userDto.getOpenid());
         if (null == userDo) {
             userMapper.insert(userDto);
         }
@@ -109,8 +108,8 @@ public class WechatServiceImpl implements WechatService {
     @Override
     public void updateConsumerInfo(UserDto userDto) {
         UserDto userDoExist = userMapper.getUserByWechatOpenid(AppContext.getCurrentUserWechatOpenId());
-        BeanUtils.copyProperties(userDto, userDoExist);
-        userMapper.updateById(userDoExist);
+        userDto.setId(userDoExist.getId());
+        userMapper.updateById(userDto);
     }
 
 }

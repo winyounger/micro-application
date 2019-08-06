@@ -72,29 +72,44 @@
     <update id="updateById" parameterType="UserDto">
         UPDATE user
         SET
-        <if test="updateMillon != null">
+        <!--<if test="updateMillon != null">
             update_millon = #{updateMillon},
-        </if>
+        </if>-->
         <if test="userName != null and userName != ''">
             user_name = #{userName},
         </if>
         <if test="password != null and password != ''">
             password = #{password},
         </if>
-        <if test="wechatOpenid != null and wechatOpenid != ''">
-            openid = #{wechatOpenid},
+        <if test="openid != null and openid != ''">
+            openid = #{openid},
         </if>
-        <if test="phone != null and phone != ''">
-            phone = #{phone},
+        <if test="mobile != null and mobile != ''">
+            mobile = #{mobile},
         </if>
         <if test="nickName != null and nickName != ''">
             nick_name = #{nickName},
         </if>
-        <if test="genderValue != null">
-            gender_value = #{genderValue},
+        <if test="gender != null">
+            gender = #{gender},
         </if>
         <if test="email != null and email != ''">
             email = #{email},
+        </if>
+        <if test="avatarUrl != null and avatarUrl != ''">
+            avatar_url = #{avatarUrl},
+        </if>
+        <if test="city != null and city != ''">
+            city = #{city},
+        </if>
+        <if test="country != null and country != ''">
+            country = #{country},
+        </if>
+        <if test="language != null and language != ''">
+            language = #{language},
+        </if>
+        <if test="province != null and province != ''">
+            province = #{province},
         </if>
         gmt_modify = NOW()
         WHERE is_delete = 0 AND id = #{id}
