@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * @Version: 1.0.0
  */
 @Mapper
-public interface UserMapper extends BaseMapper<UserDo> {
+public interface UserMapper{
 
 
     /**
@@ -25,5 +25,9 @@ public interface UserMapper extends BaseMapper<UserDo> {
 
     Integer insert(UserDto userDto);
 
-    void updateById(UserDto userDto);
+    void updateById(UserDto userDoExist);
+
+    UserDo getByUserId(@Param("userId") Long userId);
+
+    int updataUser(UserDo userDo);
 }

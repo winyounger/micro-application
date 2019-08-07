@@ -5,6 +5,7 @@ import com.supconit.dao.domain.DriverDo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface DriverMapper extends BaseMapper<DriverDo> {
+public interface DriverMapper {
 
+    int saveDriver(DriverDo driverDo);
 }

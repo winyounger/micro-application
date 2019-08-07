@@ -27,4 +27,5 @@ public class UserDo {
     private String password;
     private String thirdSessionId;
     public String code;
+    private Integer identity;
 }

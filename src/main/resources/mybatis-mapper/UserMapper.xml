@@ -115,4 +115,7 @@
         WHERE is_delete = 0 AND id = #{id}
     </update>
 
+    <select id="getByUserId" parameterType="java.lang.Long" resultType="com.supconit.dao.domain.UserDo">
+        SELECT * FROM user WHERE is_delete = 0 AND id = #{userId}
+    </select>
 </mapper>

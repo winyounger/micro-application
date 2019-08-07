@@ -9,6 +9,8 @@ import com.supconit.dao.domain.UserDo;
  * @Description:
  * @Version: 1.0.0
  */
-public interface UserService extends IService<UserDo> {
+public interface UserService{
     UserDo getUserById(Long userId);
+
+    int updataUser(UserDo userDo);
 }
