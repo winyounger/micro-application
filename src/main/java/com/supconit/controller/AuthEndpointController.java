@@ -1,6 +1,6 @@
 package com.supconit.controller;
 
-import com.supconit.core.api.ResponseData;
+import com.supconit.core.response.ResponseData;
 import com.supconit.dao.dto.UserDto;
 import com.supconit.dao.domain.UserDo;
 import com.supconit.service.WechatService;
@@ -43,8 +43,8 @@ public class AuthEndpointController {
     }
 
     @PostMapping("/updateConsumerInfo")
-    public void updateConsumerInfo(@RequestBody UserDto userDto) {
-        wechatService.updateConsumerInfo(userDto);
+    public ResponseData updateConsumerInfo(@RequestBody UserDto userDto) {
+        return wechatService.updateConsumerInfo(userDto);
     }
 
 }
