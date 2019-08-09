@@ -16,6 +16,12 @@ public class TicketController {
 
     @GetMapping("/getTicket")
     public void getTicket() {
-        ticketService.test1();
+        try {
+            ticketService.test1();
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+
     }
 }

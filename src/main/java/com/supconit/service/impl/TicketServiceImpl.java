@@ -29,7 +29,7 @@ public class TicketServiceImpl implements TicketService {
         CountDownLatch await = new CountDownLatch(100);
 
         // 依次创建并启动处于等待状态的5个MyRunnable线程
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 100; ++i) {
             new Thread(new MyRunnable(countDown, await)).start();
         }
 
@@ -37,7 +37,6 @@ public class TicketServiceImpl implements TicketService {
         System.out.println("用于触发处于等待状态的线程工作完成，等待状态线程开始工作......");
         countDown.countDown();
         await.await();
-        System.out.println("Bingo!");
         return 1;
     }
 
