@@ -4,9 +4,11 @@ import com.supconit.dao.domain.TicketDo;
 import com.supconit.dao.mapper.TicketMapper;
 import com.supconit.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CountDownLatch;
 
+@Service
 public class TicketServiceImpl implements TicketService {
 
     @Autowired
