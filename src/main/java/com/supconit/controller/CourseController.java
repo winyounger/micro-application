@@ -1,7 +1,6 @@
 package com.supconit.controller;
 
-import com.supconit.core.api.ResponseData;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.supconit.core.response.ResponseData;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

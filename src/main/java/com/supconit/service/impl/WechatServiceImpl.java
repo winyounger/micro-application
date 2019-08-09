@@ -2,7 +2,8 @@ package com.supconit.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
-import com.supconit.core.api.ResponseData;
+import com.supconit.core.enums.ResponseCodeEnum;
+import com.supconit.core.response.ResponseData;
 import com.supconit.core.api.WechatAuthCodeResponse;
 import com.supconit.core.config.AppContext;
 import com.supconit.core.config.WechatAuthConfig;
@@ -21,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: chenxuankai
@@ -53,10 +56,13 @@ public class WechatServiceImpl implements WechatService {
         String wxSessionKey = response.getSession_key();
         UserDto userDto = new UserDto();
         userDto.setOpenid(wxOpenId);
-        loginOrRegisterConsumer(userDto);
+        UserDto userDto1 = loginOrRegisterConsumer(userDto);
         Integer expires = response.getExpireTime();
-        String thirdSession = create3rdSession(wxOpenId, wxSessionKey, expires,userDto);
-        return new ResponseData(thirdSession);
+        String thirdSession = create3rdSession(wxOpenId, wxSessionKey, expires, userDto1);
+        Map<Object, Object> map = new HashMap<>();
+        map.put("token", thirdSession);
+        map.put("userId", userDto1.getId());
+        return new ResponseData(map);
     }
 
 
@@ -98,18 +104,21 @@ public class WechatServiceImpl implements WechatService {
         return thirdSessionKey;
     }
 
-    private void loginOrRegisterConsumer(UserDto userDto) {
+    private UserDto loginOrRegisterConsumer(UserDto userDto) {
         UserDto userDo = userMapper.getUserByWechatOpenid(userDto.getOpenid());
         if (null == userDo) {
             userMapper.insert(userDto);
+            return userDto;
         }
+        return userDo;
     }
 
     @Override
-    public void updateConsumerInfo(UserDto userDto) {
+    public ResponseData updateConsumerInfo(UserDto userDto) {
         UserDto userDoExist = userMapper.getUserByWechatOpenid(AppContext.getCurrentUserWechatOpenId());
         userDto.setId(userDoExist.getId());
         userMapper.updateById(userDto);
+        return new ResponseData(ResponseCodeEnum.SUCCESS.getCode());
     }
 
 }
