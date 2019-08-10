@@ -5,6 +5,9 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * @Author: chenxuankai
  * @Date: 2019年07月24日 21:24:19
@@ -25,5 +28,14 @@ public class PublishMsg {
     private String phone;
     private BigDecimal price;
     private String note;
-
+    private Date startTime;
+    private Date endTime;
+    private String startSite;
+    private String endSite;
+    private String mobile;
+    private Integer seats;
+    private String remark;
+    private Integer type;
+    private Long userId;
+    private BigDecimal amount;
 }

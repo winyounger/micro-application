@@ -1,8 +1,6 @@
 package com.supconit.controller;
 
-import com.supconit.core.config.AppContext;
 import com.supconit.dao.domain.PublishMsg;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -16,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class PassengerController {
 
     @Autowired
+    private OrderService orderService;
+    @Autowired
     private PassengerService passengerService;
 
     /**
@@ -23,6 +23,7 @@ public class PassengerController {
      * */
     @PostMapping("/publishMsg")
     public void publishMsg(@RequestBody PublishMsg publishMsg) {
+        orderService.publishOrder(publishMsg);
         String openid = AppContext.getCurrentUserWechatOpenId();
 
         System.out.println(publishMsg);
