@@ -44,10 +44,6 @@ public class ResponseData {
         }
     }
 
-    public ResponseData(String code) {
-
-    }
-
     public ResponseData() {
         this.msg = msg;
         this.result = result;

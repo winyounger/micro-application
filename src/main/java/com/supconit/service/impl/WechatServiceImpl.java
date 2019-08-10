@@ -59,10 +59,7 @@ public class WechatServiceImpl implements WechatService {
         UserDto userDto1 = loginOrRegisterConsumer(userDto);
         Integer expires = response.getExpireTime();
         String thirdSession = create3rdSession(wxOpenId, wxSessionKey, expires, userDto1);
-        Map<Object, Object> map = new HashMap<>();
-        map.put("token", thirdSession);
-        map.put("userId", userDto1.getId());
-        return new ResponseData(map);
+        return new ResponseData(thirdSession);
     }
 
 
