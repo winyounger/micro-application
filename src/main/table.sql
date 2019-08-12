@@ -22,3 +22,42 @@ CREATE TABLE `user` (
   `province` varchar(32) NOT NULL DEFAULT '' COMMENT '省',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+
+
+CREATE TABLE `driver` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `car_name` varchar(32) NOT NULL DEFAULT '' COMMENT '车辆信息',
+  `car_color` varchar(32) NOT NULL DEFAULT '' COMMENT '车辆颜色',
+  `car_number` varchar(32) NOT NULL DEFAULT '' COMMENT '车牌号',
+  `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modify` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
+  `creater` varchar(32) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '创建人',
+  `modifier` varchar(32) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '修改人',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `order` (
+  `id` bigint(20) NOT NULL,
+  `is_delete` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否删除，0表示未删除，1表示删除',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modify` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
+  `creater` varchar(32) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '创建人',
+  `modifier` varchar(32) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '修改人',
+  `amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '金额',
+  `start_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `end_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `start_site` varchar(64) NOT NULL DEFAULT '' COMMENT '起点',
+  `end_site` varchar(64) NOT NULL DEFAULT '' COMMENT '终点',
+  `seats` tinyint(3) NOT NULL DEFAULT '0' COMMENT '余座',
+  `mobile` varchar(32) NOT NULL DEFAULT '',
+  `remark` varchar(255) NOT NULL DEFAULT '' COMMENT '备注',
+  `type` tinyint(3) NOT NULL DEFAULT '1' COMMENT '类型：1乘客，2司机',
+  `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '发布人',
+  `driver_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '接单者id',
+  `pay_status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '0：未支付，1：已支付；2支付失败',
+  `settlement_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '结算金额',
+  `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '订单状态：0发布中，1已结单，2已完成，3已结算',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
