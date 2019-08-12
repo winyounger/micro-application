@@ -3,6 +3,7 @@ package com.supconit.dao.domain;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import java.math.BigDecimal;
@@ -16,9 +17,10 @@ import java.util.Date;
  */
 @Data
 @Accessors(chain = true)
-public class PublishMsg {
+public class PublishMsg implements Serializable {
 
-    private String date;
+    private Long id;
+    private Date date;
     private String time;
     private String end;
     private String start;
@@ -28,14 +30,15 @@ public class PublishMsg {
     private String phone;
     private BigDecimal price;
     private String note;
-    private Date startTime;
-    private Date endTime;
-    private String startSite;
-    private String endSite;
-    private String mobile;
-    private Integer seats;
-    private String remark;
-    private Integer type;
-    private Long userId;
-    private BigDecimal amount;
+    private String openid;
+//    private Date startTime;
+//    private Date endTime;
+//    private String startSite;
+//    private String endSite;
+//    private String mobile;
+//    private Integer seats;
+//    private String remark;
+//    private Integer type;
+//    private Long userId;
+//    private BigDecimal amount;
 }

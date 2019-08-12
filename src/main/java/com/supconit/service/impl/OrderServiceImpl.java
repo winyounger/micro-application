@@ -15,15 +15,15 @@ public class OrderServiceImpl implements OrderService {
     public int publishOrder(PublishMsg publishMsg) {
 
         OrderDo orderDo = new OrderDo();
-        orderDo.setStartTime(publishMsg.getStartTime());
-        orderDo.setEndTime(publishMsg.getEndTime());
-        orderDo.setStartSite(publishMsg.getStartSite());
-        orderDo.setEndSite(publishMsg.getEndSite());
-        orderDo.setAmount(publishMsg.getAmount());
-        orderDo.setSeats(publishMsg.getSeats());
-        orderDo.setType(publishMsg.getType());
-        orderDo.setMobile(publishMsg.getMobile());
-        orderDo.setRemark(publishMsg.getRemark());
+//        orderDo.setStartTime(publishMsg.getStartTime());
+//        orderDo.setEndTime(publishMsg.getEndTime());
+//        orderDo.setStartSite(publishMsg.getStartSite());
+//        orderDo.setEndSite(publishMsg.getEndSite());
+//        orderDo.setAmount(publishMsg.getAmount());
+//        orderDo.setSeats(publishMsg.getSeats());
+//        orderDo.setType(publishMsg.getType());
+//        orderDo.setMobile(publishMsg.getMobile());
+//        orderDo.setRemark(publishMsg.getRemark());
 
         return orderMapper.creatOrder(orderDo);
     }

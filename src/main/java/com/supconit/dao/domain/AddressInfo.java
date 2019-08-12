@@ -15,10 +15,10 @@ import java.math.BigDecimal;
 @Accessors(chain = true)
 public class AddressInfo {
 
-    private String name;
-    private String address;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
-    private AddressComponent addressComponent;
+    private String name;//道路名称
+    private String address;//详细地址
+    private BigDecimal latitude;//纬度
+    private BigDecimal longitude;//经度
+    private AddressComponent addressComponent;//详细信息
 
 }

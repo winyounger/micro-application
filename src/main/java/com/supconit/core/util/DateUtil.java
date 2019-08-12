@@ -45,7 +45,13 @@ public class DateUtil {
      * yyyy-MM-dd
      */
     public static final String DEFAULT_PATTERN_WITH_HYPHEN = "yyyy-MM-dd";
-    
+
+    /**
+     * yyyy-MM-dd
+     * attention the last has blank space
+     */
+    public static final String DEFAULT_PATTERN_WITH_HYPHEN_BLANK_SPACE  = "yyyy-MM-dd ";
+
     /**
      * yyyy-MM
      */
@@ -138,7 +144,25 @@ public class DateUtil {
     public static String formatDate(final Date date, String format) {
         return new SimpleDateFormat(format).format(date);
     }
-    
+
+    /**
+     * description 将时间字符串拼接到日期后专程日期类型返回
+     * @param date 年月日
+     * @param hhmm 时分
+     * @return Date
+     * */
+    public static Date joinDate(Date date, String hhmm) {
+        SimpleDateFormat df = new SimpleDateFormat(DATE_TIME_MINUTE);
+        SimpleDateFormat ds = new SimpleDateFormat(DEFAULT_PATTERN_WITH_HYPHEN_BLANK_SPACE);
+        try {
+            return df.parse(ds.format(date) + hhmm);
+        } catch (Exception e) {
+            logger.error("");
+        }
+        return null;
+
+    }
+
     /**
      * Add specified number of days to the given date.
      * 

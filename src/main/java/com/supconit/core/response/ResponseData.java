@@ -45,8 +45,7 @@ public class ResponseData {
     }
 
     public ResponseData() {
-        this.msg = msg;
-        this.result = result;
-        this.code = code;
+        this.msg = ResponseCodeEnum.SUCCESS.getDesc();
+        this.code = ResponseCodeEnum.SUCCESS.getCode();
     }
 }

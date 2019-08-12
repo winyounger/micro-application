@@ -13,11 +13,11 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class AddressComponent {
 
-    private String city;
-    private String district;
-    private String nation;
-    private String province;
-    private String street;
-    private String street_number;
+    private String city;//市
+    private String district;//区
+    private String nation;//国家
+    private String province;//省
+    private String street;//路
+    private String street_number;//路号
 
 }
