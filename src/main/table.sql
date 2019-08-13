@@ -36,6 +36,7 @@ CREATE TABLE `passenger_publish_msg` (
   `phone` varchar(11) NOT NULL DEFAULT '' COMMENT '乘客联系手机号',
   `price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '可接受价',
   `note` varchar(256) NOT NULL DEFAULT '' COMMENT '备注',
+  `is_complete` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0表示未完成，1表示为已完成订单',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='乘客发布信息表';
 
@@ -98,4 +99,47 @@ CREATE TABLE `order` (
   `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '订单状态：0发布中，1已结单，2已完成，3已结算',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `driver_publish_msg`;
+CREATE TABLE `driver_publish_msg` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `is_delete` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否删除，0表示未删除，1表示删除',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modify` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
+  `openid` varchar(32) NOT NULL DEFAULT '' COMMENT '小程序用户openid',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '乘客出发时间',
+  `start` varchar(64) NOT NULL DEFAULT '' COMMENT '起始地址',
+  `end` varchar(64) NOT NULL DEFAULT '' COMMENT '到达地址',
+  `surplus_seat` tinyint(4) NOT NULL DEFAULT '0' COMMENT '余座',
+  `phone` varchar(11) NOT NULL DEFAULT '' COMMENT '乘客联系手机号',
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '可接受价',
+  `note` varchar(256) NOT NULL DEFAULT '' COMMENT '备注',
+	`car_info` varchar(16) NOT NULL DEFAULT '' COMMENT '车辆品牌型号颜色',
+	`car_num` varchar(16) NOT NULL DEFAULT '' COMMENT '车牌号',
+	`is_complete` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0表示未完成，1表示为已完成订单',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='司机发布信息表';
+
+
+DROP TABLE IF EXISTS `driver_publish_msg_address`;
+CREATE TABLE `driver_publish_msg_address` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `is_delete` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否删除，0表示未删除，1表示删除',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modify` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
+  `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0表示出发地址，1表示到达地址',
+  `msg_id` bigint(20) NOT NULL COMMENT 'publish_msg表主键',
+  `name` varchar(64) NOT NULL DEFAULT '' COMMENT '地址名称',
+  `address` varchar(64) NOT NULL DEFAULT '' COMMENT '详细地址',
+  `longitude` decimal(12,8) NOT NULL DEFAULT '0.00000000' COMMENT '经度',
+  `latitude` decimal(12,8) NOT NULL DEFAULT '0.00000000' COMMENT '纬度',
+  `nation` varchar(12) NOT NULL DEFAULT '' COMMENT '国家',
+  `province` varchar(12) NOT NULL DEFAULT '' COMMENT '省',
+  `city` varchar(12) NOT NULL DEFAULT '' COMMENT '市',
+  `district` varchar(12) NOT NULL DEFAULT '' COMMENT '区',
+  `street` varchar(12) NOT NULL DEFAULT '' COMMENT '路',
+  `street_number` varchar(12) NOT NULL DEFAULT '' COMMENT '路号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='司机发布信息——详细地址表';
 

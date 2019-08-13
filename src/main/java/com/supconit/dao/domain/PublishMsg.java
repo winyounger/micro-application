@@ -31,6 +31,14 @@ public class PublishMsg implements Serializable {
     private BigDecimal price;
     private String note;
     private String openid;
+
+    /**
+     * 司机相关
+     * */
+    private Integer surplusSeat;//余座
+    private String carInfo;//车辆品牌型号颜色
+    private String carNum;//车牌号
+
 //    private Date startTime;
 //    private Date endTime;
 //    private String startSite;

@@ -2,6 +2,7 @@ package com.supconit.controller;
 
 import com.supconit.core.api.WechatAuthenticationResponse;
 import com.supconit.core.response.AjaxMessage;
+import com.supconit.core.response.ResponseData;
 import com.supconit.dao.domain.UserDo;
 import com.supconit.query.CommonQuery;
 import com.supconit.service.DriverService;
@@ -35,8 +36,9 @@ public class DriverController {
      * 司机发布信息接口
      * */
     @PostMapping("/publishMsg")
-    public void publishMsg(@RequestBody PublishMsg publishMsg) {
+    public ResponseData publishMsg(@RequestBody PublishMsg publishMsg) {
         System.out.println(publishMsg);
+        return driverService.publishOrder(publishMsg);
     }
     @PostMapping("/creatDriver")
     public AjaxMessage creatDriver(@RequestBody CommonQuery commonQuery) {

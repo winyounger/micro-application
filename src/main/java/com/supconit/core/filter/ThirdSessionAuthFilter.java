@@ -37,7 +37,7 @@ public class ThirdSessionAuthFilter extends OncePerRequestFilter {
         //获取请求头部分的Authorization
         String authHeader = request.getHeader(this.tokenHeader);
         String allowUrl = "/index/getAllCourseTotal,/user/getUserInfo,/index/getCourseByDistrict," +
-                "/passenger/publishMsg,/course/getByDistrict,/driver/publishMsg,/driver/creatDriver";
+                "/course/getByDistrict,/driver/creatDriver";
         //如果请求路径为微信通知后台支付结果则不需要token（之后会在具体的controller中，对双方签名进行验证防钓鱼）
         String url = request.getRequestURI().substring(request.getContextPath().length());
         if (url.equals("/auth") || url.equals("/test") || url.contains("/test") || allowUrl.contains(url)) {
