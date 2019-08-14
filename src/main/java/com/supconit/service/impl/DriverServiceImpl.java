@@ -4,8 +4,10 @@ import com.supconit.core.config.AppContext;
 import com.supconit.core.response.ResponseData;
 import com.supconit.core.util.DateUtil;
 import com.supconit.dao.domain.*;
+import com.supconit.dao.dto.PublishMsgDto;
 import com.supconit.dao.mapper.DriverMapper;
 import com.supconit.query.CommonQuery;
+import com.supconit.query.SearchTripQuery;
 import com.supconit.service.DriverService;
 import com.supconit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @Service("driverService")
 public class DriverServiceImpl implements DriverService {
@@ -52,6 +55,24 @@ public class DriverServiceImpl implements DriverService {
         //2.到达信息地址
         saveRecordDetail(1, publishMsg.getId(), publishMsg.getEndAddressInfo());
         return new ResponseData();
+    }
+
+    @Override
+    public ResponseData getTripByDistrict(SearchTripQuery searchObj) {
+        List<PublishMsgDto> list = driverMapper.getMainTripByDistrict(searchObj);
+        list.stream().forEach(publishMsg -> {
+            List<AddressInfo> addressInfoList = driverMapper.getAddressInfoByMsgId(publishMsg.getId());
+            addressInfoList.stream().forEach(addressInfo -> {
+                if(addressInfo.getType().equals(0)) {
+                    //出发地址
+                    publishMsg.setStartAddressInfo(addressInfo);
+                }else {
+                    //到达地址
+                    publishMsg.setEndAddressInfo(addressInfo);
+                }
+            });
+        });
+        return new ResponseData(list);
     }
 
     public void saveRecordDetail(Integer type, Long msgId, AddressInfo addressInfo) {

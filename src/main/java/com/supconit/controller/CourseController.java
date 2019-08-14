@@ -2,14 +2,14 @@ package com.supconit.controller;
 
 import com.supconit.core.response.ResponseData;
 import com.supconit.query.SearchTripQuery;
+import com.supconit.service.DriverService;
 import com.supconit.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +24,8 @@ public class CourseController {
 
     @Autowired
     private PassengerService passengerService;
+    @Autowired
+    private DriverService driverService;
 
     /**
      * 根据地址查找相关行程汇总数据
@@ -36,9 +38,22 @@ public class CourseController {
             return passengerService.getTripByDistrict(searchObj);
         } else {
             //查询司机行程
-
+            return driverService.getTripByDistrict(searchObj);
         }
-        return new ResponseData();
+    }
+
+    /**
+     * 首页的行程汇总统计,暂时写的假数据
+     * */
+    @GetMapping("/getAllCourseTotal")
+    public ResponseData getAllCourseTotal() {
+        Map map = new HashMap<String, Object>();
+        map.put("city","杭州市");
+        map.put("sum",27);
+        map.put("id",1);
+        List<Map> list = new ArrayList<>();
+        list.add(map);
+        return new ResponseData(list);
     }
 
     /**

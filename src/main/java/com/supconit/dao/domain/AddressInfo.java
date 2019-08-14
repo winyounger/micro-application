@@ -20,5 +20,8 @@ public class AddressInfo {
     private BigDecimal latitude;//纬度
     private BigDecimal longitude;//经度
     private AddressComponent addressComponent;//详细信息
+    //查询相关参数
+    //0表示出发地址，1表示到达地址
+    private Integer type;
 
 }

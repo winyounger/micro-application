@@ -1,7 +1,13 @@
 package com.supconit.dao.mapper;
 
+import com.supconit.dao.domain.AddressInfo;
 import com.supconit.dao.domain.PublishMsg;
 import com.supconit.dao.domain.PublishMsgAddress;
+import com.supconit.dao.dto.PublishMsgDto;
+import com.supconit.query.SearchTripQuery;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Author: 陈旋凯
@@ -24,4 +30,8 @@ public interface PassengerMapper {
      * @return
      * */
     void saveAddressRecord(PublishMsgAddress publishMsgAddress);
+
+    List<PublishMsgDto> getMainTripByDistrict(SearchTripQuery searchObj);
+
+    List<AddressInfo> getAddressInfoByMsgId(@Param("msgId") Long msgId);
 }

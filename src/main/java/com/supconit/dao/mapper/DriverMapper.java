@@ -1,10 +1,15 @@
 package com.supconit.dao.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.supconit.dao.domain.AddressInfo;
 import com.supconit.dao.domain.DriverDo;
 import com.supconit.dao.domain.PublishMsg;
 import com.supconit.dao.domain.PublishMsgAddress;
+import com.supconit.dao.dto.PublishMsgDto;
+import com.supconit.query.SearchTripQuery;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface DriverMapper {
@@ -14,4 +19,8 @@ public interface DriverMapper {
     void saveRecord(PublishMsg publishMsg);
 
     void saveAddressRecord(PublishMsgAddress publishMsgAddress);
+
+    List<PublishMsgDto> getMainTripByDistrict(SearchTripQuery searchObj);
+
+    List<AddressInfo> getAddressInfoByMsgId(@Param("msgId") Long msgId);
 }

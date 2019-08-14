@@ -1,6 +1,5 @@
 package com.supconit.controller;
 
-import com.supconit.core.api.WechatAuthenticationResponse;
 import com.supconit.core.response.AjaxMessage;
 import com.supconit.core.response.ResponseData;
 import com.supconit.dao.domain.UserDo;
@@ -8,10 +7,6 @@ import com.supconit.query.CommonQuery;
 import com.supconit.service.DriverService;
 import com.supconit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.concurrent.TimeUnit;
 import com.supconit.dao.domain.PublishMsg;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

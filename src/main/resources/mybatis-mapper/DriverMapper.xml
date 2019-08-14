@@ -194,4 +194,32 @@
         </trim>
     </insert>
 
+    <select id="getMainTripByDistrict" parameterType="com.supconit.query.SearchTripQuery" resultType="com.supconit.dao.dto.PublishMsgDto">
+        SELECT
+            *
+        FROM
+            `driver_publish_msg`
+        WHERE
+            is_delete = 0
+        <if test="date != null">
+            AND  date LIKE CONCAT('',#{date},'%')
+        </if>
+        <if test="start != null and start != ''">
+            AND `start` LIKE CONCAT('%',#{start},'%')
+        </if>
+        <if test="end != null and end != ''">
+            AND `end` LIKE  CONCAT('%',#{end},'%')
+        </if>
+    </select>
+
+    <select id="getAddressInfoByMsgId" parameterType="java.lang.Long" resultType="com.supconit.dao.domain.AddressInfo">
+        SELECT
+            *
+        FROM
+            `driver_publish_msg_address`
+        WHERE
+            is_delete = 0
+        AND msg_id = #{msgId}
+    </select>
+
 </mapper>
