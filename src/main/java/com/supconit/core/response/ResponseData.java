@@ -23,6 +23,11 @@ public class ResponseData {
         this.code = code;
     }
 
+    public ResponseData(String msg, String code) {
+        this.msg = msg;
+        this.code = code;
+    }
+
     public ResponseData( Object result) {
         if (result instanceof String) {
             String resultStr = (String)result;

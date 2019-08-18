@@ -2,6 +2,7 @@ package com.supconit.controller;
 
 import com.supconit.core.response.ResponseData;
 import com.supconit.query.SearchTripQuery;
+import com.supconit.service.CollectService;
 import com.supconit.service.DriverService;
 import com.supconit.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Map;
 /**
  * @Author: chenxuankai
  * @Date: 2019年07月25日 21:35:02
- * @Description:
+ * @Description: 用户行程相关controller
  * @Version: 1.0.0
  */
 @RestController
@@ -26,6 +27,8 @@ public class CourseController {
     private PassengerService passengerService;
     @Autowired
     private DriverService driverService;
+    @Autowired
+    private CollectService collectService;
 
     /**
      * 根据地址查找相关行程汇总数据
@@ -60,25 +63,18 @@ public class CourseController {
      * 查询是否已收藏
      * */
     @PostMapping("/getIsCollectedCourse")
-    public ResponseData getIsCollectedCourse(String courseId) {
-        System.out.println("jin lai le meiyou a ");
-        System.out.println(courseId);
-        Map map = new HashMap<String, String>();
-        map.put("data","啦啦啦，成功返回啦！");
-        return new ResponseData(map);
+    public ResponseData getIsCollectedCourse(Long courseId, Integer courseType) {
+        return collectService.getIsCollectedCourse(courseId, courseType);
     }
+
 
 
     /**
      * 收藏
      * */
     @PostMapping("/collectCourse")
-    public ResponseData collectCourse(String courseId, String courseType) {
-        System.out.println("jin lai le meiyou a ");
-        System.out.println(courseId + "," + courseType);
-        Map map = new HashMap<String, String>();
-        map.put("data","啦啦啦，成功返回啦！");
-        return new ResponseData(map);
+    public ResponseData collectCourse(Long courseId, Integer courseType) {
+        return collectService.collectCourse(courseId, courseType);
     }
 
     /**

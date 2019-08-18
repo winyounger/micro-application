@@ -12,8 +12,8 @@ spring:
         master:
           username: root
           password: root
-          url: jdbc:mysql://10.10.100.152:3306/wapp?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-#          url: jdbc:mysql://localhost:3306/wapp?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL
+#          url: jdbc:mysql://10.10.100.152:3306/wapp?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://localhost:3306/wapp?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL
           driver-class-name: com.mysql.cj.jdbc.Driver
           type: com.alibaba.druid.pool.DruidDataSource
           #  数据源其他配置

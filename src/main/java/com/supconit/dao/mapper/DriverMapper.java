@@ -23,4 +23,6 @@ public interface DriverMapper {
     List<PublishMsgDto> getMainTripByDistrict(SearchTripQuery searchObj);
 
     List<AddressInfo> getAddressInfoByMsgId(@Param("msgId") Long msgId);
+
+    PublishMsgDto getById(@Param("id") Long id);
 }

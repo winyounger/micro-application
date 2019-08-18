@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://hc.supconit.com/mybatis-3-mapper.dtd">
+<mapper namespace="com.supconit.dao.mapper.CollectMapper">
+
+    <insert id="saveRecord" parameterType="com.supconit.dao.domain.CollectDo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO collect
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            gmt_create,
+            gmt_modify,
+            <if test="openid != null and openid != ''">
+                openid,
+            </if>
+            <if test="courseId != null">
+                course_id,
+            </if>
+            <if test="courseType != null">
+                course_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            NOW(),
+            NOW(),
+            <if test="openid != null and openid != ''">
+                #{openid},
+            </if>
+            <if test="courseId != null">
+                #{courseId},
+            </if>
+            <if test="courseType != null">
+                #{courseType},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getByCourseIdAndOpenid" resultType="com.supconit.dao.domain.CollectDo">
+        SELECT
+            *
+        FROM
+            collect
+        WHERE
+            is_delete = 0
+        AND
+            course_id = #{courseId}
+        AND
+            openid = #{openid}
+    </select>
+
+</mapper>

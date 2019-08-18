@@ -143,3 +143,15 @@ CREATE TABLE `driver_publish_msg_address` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='司机发布信息——详细地址表';
 
+DROP TABLE IF EXISTS `collect`;
+CREATE TABLE `collect` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `is_delete` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否删除，0表示未删除，1表示删除',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modify` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
+  `openid` varchar(32) NOT NULL DEFAULT '' COMMENT '用户openid',
+	`course_id` bigint(20) NOT NULL COMMENT '对应publish_msg表主键',
+	`course_type` tinyint(4) NOT NULL COMMENT '0: 乘客行程， 1：司机行程',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户收藏行程表';
+

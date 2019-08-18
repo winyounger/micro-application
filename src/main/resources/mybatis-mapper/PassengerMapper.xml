@@ -174,4 +174,14 @@
         AND msg_id = #{msgId}
     </select>
 
+    <select id="getById" parameterType="java.lang.Long" resultType="com.supconit.dao.dto.PublishMsgDto">
+        SELECT
+            *
+        FROM
+            `passenger_publish_msg`
+        WHERE
+            is_delete = 0
+        AND id = #{id}
+    </select>
+
 </mapper>
