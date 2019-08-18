@@ -1,60 +1,80 @@
 package com.supconit.controller;
 
-import com.supconit.core.api.ResponseData;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.supconit.core.response.ResponseData;
+import com.supconit.query.SearchTripQuery;
+import com.supconit.service.CollectService;
+import com.supconit.service.DriverService;
+import com.supconit.service.PassengerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @Author: chenxuankai
  * @Date: 2019年07月25日 21:35:02
- * @Description:
+ * @Description: 用户行程相关controller
  * @Version: 1.0.0
  */
 @RestController
 @RequestMapping("/course")
 public class CourseController {
 
+    @Autowired
+    private PassengerService passengerService;
+    @Autowired
+    private DriverService driverService;
+    @Autowired
+    private CollectService collectService;
 
     /**
      * 根据地址查找相关行程汇总数据
      * */
     @PostMapping("/getByDistrict")
-    public ResponseData getCourseByDistrict(String start, String end, String date, Integer showType) {
-        System.out.println("jin lai le meiyou a ");
-        System.out.println(start+","+ end +","+ date+","+ showType);
-        Map map = new HashMap<String, String>();
-        map.put("data","啦啦啦，成功返回啦！");
-        return new ResponseData(map);
+    public ResponseData getTripByDistrict(@RequestBody SearchTripQuery searchObj) {
+        Integer showType = searchObj.getShowType();
+        if (showType.equals(0)) {
+            //查询乘客行程
+            return passengerService.getTripByDistrict(searchObj);
+        } else {
+            //查询司机行程
+            return driverService.getTripByDistrict(searchObj);
+        }
+    }
+
+    /**
+     * 首页的行程汇总统计,暂时写的假数据
+     * */
+    @GetMapping("/getAllCourseTotal")
+    public ResponseData getAllCourseTotal() {
+        Map map = new HashMap<String, Object>();
+        map.put("city","杭州市");
+        map.put("sum",27);
+        map.put("id",1);
+        List<Map> list = new ArrayList<>();
+        list.add(map);
+        return new ResponseData(list);
     }
 
     /**
      * 查询是否已收藏
      * */
     @PostMapping("/getIsCollectedCourse")
-    public ResponseData getIsCollectedCourse(String courseId) {
-        System.out.println("jin lai le meiyou a ");
-        System.out.println(courseId);
-        Map map = new HashMap<String, String>();
-        map.put("data","啦啦啦，成功返回啦！");
-        return new ResponseData(map);
+    public ResponseData getIsCollectedCourse(Long courseId, Integer courseType) {
+        return collectService.getIsCollectedCourse(courseId, courseType);
     }
+
 
 
     /**
      * 收藏
      * */
     @PostMapping("/collectCourse")
-    public ResponseData collectCourse(String courseId, String courseType) {
-        System.out.println("jin lai le meiyou a ");
-        System.out.println(courseId + "," + courseType);
-        Map map = new HashMap<String, String>();
-        map.put("data","啦啦啦，成功返回啦！");
-        return new ResponseData(map);
+    public ResponseData collectCourse(Long courseId, Integer courseType) {
+        return collectService.collectCourse(courseId, courseType);
     }
 
     /**

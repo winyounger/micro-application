@@ -14,13 +14,18 @@ import org.springframework.stereotype.Service;
  * @Version: 1.0.0
  */
 @Service("userService")
-public class UserServiceImpl extends ServiceImpl<UserMapper, UserDo> implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
 
     @Override
     public UserDo getUserById(Long userId) {
-        return userMapper.selectById(userId);
+        return userMapper.getByUserId(userId);
+    }
+
+    @Override
+    public int updataUser(UserDo userDo) {
+        return userMapper.updataUser(userDo);
     }
 }

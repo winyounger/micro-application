@@ -1,11 +1,10 @@
-package com.supconit.dao.domain;
+package com.supconit.dao.dto;
 
+import com.supconit.dao.domain.AddressInfo;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -17,10 +16,10 @@ import java.util.Date;
  */
 @Data
 @Accessors(chain = true)
-public class PublishMsg implements Serializable {
+public class PublishMsgDto implements Serializable {
 
     private Long id;
-    private Date date;
+    private String date;
     private String time;
     private String end;
     private String start;

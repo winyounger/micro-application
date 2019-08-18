@@ -1,12 +1,11 @@
 package com.supconit.controller;
 
-import com.supconit.core.api.WechatAuthenticationResponse;
+import com.supconit.core.response.ResponseData;
 import com.supconit.dao.dto.UserDto;
 import com.supconit.dao.domain.UserDo;
 import com.supconit.service.WechatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -39,14 +38,13 @@ public class AuthEndpointController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<WechatAuthenticationResponse> createAuthenticationToken(@RequestBody UserDo userDo) throws Exception {
-        WechatAuthenticationResponse jwtResponse = wechatService.wechatLogin(userDo.getCode());
-        return ResponseEntity.ok(jwtResponse);
+    public ResponseData createAuthenticationToken(@RequestBody UserDo userDo) throws Exception {
+        return wechatService.wechatLogin(userDo.getCode());
     }
 
     @PostMapping("/updateConsumerInfo")
-    public void updateConsumerInfo(@RequestBody UserDto userDto) {
-//        wechatService.updateConsumerInfo(userDto);
+    public ResponseData updateConsumerInfo(@RequestBody UserDto userDto) {
+        return wechatService.updateConsumerInfo(userDto);
     }
 
 }

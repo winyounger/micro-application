@@ -1,6 +1,6 @@
 package com.supconit.service;
 
-import com.supconit.core.api.WechatAuthenticationResponse;
+import com.supconit.core.response.ResponseData;
 import com.supconit.dao.dto.UserDto;
 
 /**
@@ -12,7 +12,7 @@ import com.supconit.dao.dto.UserDto;
 public interface WechatService {
 
 
-    WechatAuthenticationResponse wechatLogin(String code) throws Exception;
+    ResponseData wechatLogin(String code) throws Exception;
 
-    void updateConsumerInfo(UserDto userDto);
+    ResponseData updateConsumerInfo(UserDto userDto);
 }

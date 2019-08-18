@@ -3,6 +3,7 @@ package com.supconit.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.supconit.dao.domain.UserDo;
 import com.supconit.dao.dto.UserDto;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -11,7 +12,8 @@ import org.apache.ibatis.annotations.Param;
  * @Description:
  * @Version: 1.0.0
  */
-public interface UserMapper extends BaseMapper<UserDo> {
+@Mapper
+public interface UserMapper{
 
 
     /**
@@ -24,4 +26,8 @@ public interface UserMapper extends BaseMapper<UserDo> {
     Integer insert(UserDto userDto);
 
     void updateById(UserDto userDoExist);
+
+    UserDo getByUserId(@Param("userId") Long userId);
+
+    int updataUser(UserDo userDo);
 }

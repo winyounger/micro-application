@@ -3,14 +3,14 @@ package com.supconit.service.impl;
 import com.supconit.core.config.AppContext;
 import com.supconit.core.response.ResponseData;
 import com.supconit.core.util.DateUtil;
-import com.supconit.dao.domain.*;
+import com.supconit.dao.domain.AddressComponent;
+import com.supconit.dao.domain.AddressInfo;
+import com.supconit.dao.domain.PublishMsg;
+import com.supconit.dao.domain.PublishMsgAddress;
 import com.supconit.dao.dto.PublishMsgDto;
-import com.supconit.dao.mapper.DriverMapper;
-import com.supconit.query.CommonQuery;
+import com.supconit.dao.mapper.PassengerMapper;
 import com.supconit.query.SearchTripQuery;
-import com.supconit.service.DriverService;
-import com.supconit.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.supconit.service.PassengerService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,27 +18,17 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-@Service("driverService")
-public class DriverServiceImpl implements DriverService {
-    @Resource
-    private DriverMapper driverMapper;
-    @Autowired
-    private UserService userService;
+/**
+ * @Author: 陈旋凯
+ * @Date: 2019-08-10- 14:42:22
+ * @Description:
+ * @Version: 1.0.0
+ */
+@Service("passengerService")
+public class PassengerServiceImpl implements PassengerService {
 
-    @Override
-    public int creatDriver(CommonQuery commonQuery) {
-        DriverDo driverDo = new DriverDo();
-        driverDo.setUserId(commonQuery.getUserId());
-        driverDo.setCarColor(commonQuery.getCarColor());
-        driverDo.setCarName(commonQuery.getCarName());
-        driverDo.setCarNumber(commonQuery.getCarNumber());
-        driverMapper.saveDriver(driverDo);
-        UserDo userDo = new UserDo();
-        userDo.setId(commonQuery.getUserId());
-        userDo.setIdentity(2);
-        userService.updataUser(userDo);
-        return 1;
-    }
+    @Resource
+    private PassengerMapper passengerMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -47,7 +37,7 @@ public class DriverServiceImpl implements DriverService {
         Date date = DateUtil.joinDate(publishMsg.getDate(), publishMsg.getTime());
         publishMsg.setDate(date).setOpenid(openid);
         //保存到信息表
-        driverMapper.saveRecord(publishMsg);
+        passengerMapper.saveRecord(publishMsg);
         //保存发布信息的详细地址
         //1.出发地信息地址
         //type类型 0表示出发地址，1表示到达地址
@@ -59,9 +49,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public ResponseData getTripByDistrict(SearchTripQuery searchObj) {
-        List<PublishMsgDto> list = driverMapper.getMainTripByDistrict(searchObj);
-        list.stream().forEach(publishMsg -> {
-            List<AddressInfo> addressInfoList = driverMapper.getAddressInfoByMsgId(publishMsg.getId());
+        List<PublishMsgDto> list = passengerMapper.getMainTripByDistrict(searchObj);
+        list.stream().forEach( publishMsg -> {
+            List<AddressInfo> addressInfoList = passengerMapper.getAddressInfoByMsgId(publishMsg.getId());
             addressInfoList.stream().forEach(addressInfo -> {
                 if(addressInfo.getType().equals(0)) {
                     //出发地址
@@ -84,6 +74,6 @@ public class DriverServiceImpl implements DriverService {
                 .setCity(addressComponent.getCity()).setDistrict(addressComponent.getDistrict())
                 .setStreet(addressComponent.getStreet()).setStreetNumber(addressComponent.getStreet_number())
                 .setMsgId(msgId);
-        driverMapper.saveAddressRecord(publishMsgAddress);
+        passengerMapper.saveAddressRecord(publishMsgAddress);
     }
 }

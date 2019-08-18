@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://hc.supconit.com/mybatis-3-mapper.dtd">
+<mapper namespace="com.supconit.dao.mapper.PassengerMapper">
+
+    <insert id="saveRecord" parameterType="com.supconit.dao.domain.PublishMsg" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO passenger_publish_msg
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            gmt_create,
+            gmt_modify,
+            <if test="openid != null and openid != ''">
+                openid,
+            </if>
+            <if test="date != null">
+                date,
+            </if>
+            <if test="start != null and start != ''">
+                start,
+            </if>
+            <if test="end != null and end != ''">
+                end,
+            </if>
+            <if test="personNum != null">
+                person_num,
+            </if>
+            <if test="phone != null and phone != ''">
+                phone,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="note != null and note != ''">
+                note,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            NOW(),
+            NOW(),
+           <if test="openid != null and openid != ''">
+                #{openid},
+            </if>
+            <if test="date != null">
+                #{date},
+            </if>
+            <if test="start != null and start != ''">
+                #{start},
+            </if>
+            <if test="end != null and end != ''">
+                #{end},
+            </if>
+            <if test="personNum != null">
+                #{personNum},
+            </if>
+            <if test="phone != null and phone != ''">
+                #{phone},
+            </if>
+            <if test="price != null">
+                #{price},
+            </if>
+            <if test="note != null and note != ''">
+                #{note},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="saveAddressRecord" parameterType="com.supconit.dao.domain.PublishMsgAddress" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO passenger_publish_msg_address
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            gmt_create,
+            gmt_modify,
+            <if test="type != null">
+                type,
+            </if>
+            <if test="msgId != null">
+                msg_id,
+            </if>
+            <if test="name != null and name != ''">
+                name,
+            </if>
+            <if test="address != null and address != ''">
+                address,
+            </if>
+            <if test="longitude != null">
+                longitude,
+            </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+            <if test="nation != null and nation != ''">
+                nation,
+            </if>
+            <if test="province != null and province != ''">
+                province,
+            </if>
+            <if test="city != null and city != ''">
+                city,
+            </if>
+            <if test="district != null and district != ''">
+                district,
+            </if>
+            <if test="street != null and street != ''">
+                street,
+            </if>
+            <if test="streetNumber != null and streetNumber != ''">
+                street_number,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            NOW(),
+            NOW(),
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="msgId != null">
+                 #{msgId},
+            </if>
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="address != null and address != ''">
+                 #{address},
+            </if>
+            <if test="longitude != null">
+                #{longitude},
+            </if>
+            <if test="latitude != null">
+                #{latitude},
+            </if>
+            <if test="nation != null and nation != ''">
+                #{nation},
+            </if>
+            <if test="province != null and province != ''">
+                #{province},
+            </if>
+            <if test="city != null and city != ''">
+                #{city},
+            </if>
+            <if test="district != null and district != ''">
+                #{district},
+            </if>
+            <if test="street != null and street != ''">
+                #{street},
+            </if>
+            <if test="streetNumber != null and streetNumber != ''">
+                #{streetNumber},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getMainTripByDistrict" parameterType="com.supconit.query.SearchTripQuery" resultType="com.supconit.dao.dto.PublishMsgDto">
+        SELECT
+            *
+        FROM
+            `passenger_publish_msg`
+        WHERE
+            is_delete = 0
+        <if test="date != null">
+            AND  date LIKE CONCAT('',#{date},'%')
+        </if>
+        <if test="start != null and start != ''">
+            AND `start` LIKE CONCAT('%',#{start},'%')
+        </if>
+        <if test="end != null and end != ''">
+            AND `end` LIKE  CONCAT('%',#{end},'%')
+        </if>
+    </select>
+
+    <select id="getAddressInfoByMsgId" parameterType="java.lang.Long" resultType="com.supconit.dao.domain.AddressInfo">
+        SELECT
+            *
+        FROM
+            `passenger_publish_msg_address`
+        WHERE
+            is_delete = 0
+        AND msg_id = #{msgId}
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.supconit.dao.dto.PublishMsgDto">
+        SELECT
+            *
+        FROM
+            `passenger_publish_msg`
+        WHERE
+            is_delete = 0
+        AND id = #{id}
+    </select>
+
+</mapper>

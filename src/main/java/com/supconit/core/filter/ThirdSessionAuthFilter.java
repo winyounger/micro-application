@@ -36,15 +36,15 @@ public class ThirdSessionAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         //获取请求头部分的Authorization
         String authHeader = request.getHeader(this.tokenHeader);
-        String allowUrl = "/index/getAllCourseTotal,/user/getUserInfo,/index/getCourseByDistrict," +
-                "/updateConsumerInfo,/passenger/publishMsg,/course/getByDistrict";
+        String allowUrl = "/course/getAllCourseTotal,/user/getUserInfo," +
+                "/course/getByDistrict,/driver/creatDriver";
         //如果请求路径为微信通知后台支付结果则不需要token（之后会在具体的controller中，对双方签名进行验证防钓鱼）
         String url = request.getRequestURI().substring(request.getContextPath().length());
         if (url.equals("/auth") || url.equals("/test") || url.contains("/test") || allowUrl.contains(url)) {
             chain.doFilter(request, response);
             return;
         }
-        /*if (null == authHeader || !authHeader.startsWith("Bearer")) {
+        if (null == authHeader || !authHeader.startsWith("Bearer")) {
             throw new RuntimeException("非法访问用户");
         }
         // The part after "Bearer "
@@ -61,8 +61,8 @@ public class ThirdSessionAuthFilter extends OncePerRequestFilter {
 //            throw new RuntimeException("用户身份已过期");
 //        }
         // 设置当前登录用户
-        try (AppContext appContext = new AppContext(openid + 1)) {
+        try (AppContext appContext = new AppContext(openid)) {
             chain.doFilter(request, response);
-        }*/
+        }
     }
 }

@@ -9,8 +9,8 @@ package com.supconit.core.enums;
  */
 public enum ResponseCodeEnum {
 
-    SUCCESS("SUCCESS","获取成功"),
-    FAILD("FAILD","获取失败");
+    SUCCESS("SUCCESS","操作成功"),
+    FAILD("FAILD","操作失败");
 
     private String code;
     private String desc;

@@ -1,16 +1,12 @@
 package com.supconit.controller;
 
-import com.supconit.core.api.WechatAuthenticationResponse;
 import com.supconit.core.response.AjaxMessage;
+import com.supconit.core.response.ResponseData;
 import com.supconit.dao.domain.UserDo;
 import com.supconit.query.CommonQuery;
 import com.supconit.service.DriverService;
 import com.supconit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.concurrent.TimeUnit;
 import com.supconit.dao.domain.PublishMsg;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,14 +31,17 @@ public class DriverController {
      * 司机发布信息接口
      * */
     @PostMapping("/publishMsg")
-    public void publishMsg(@RequestBody PublishMsg publishMsg) {
+    public ResponseData publishMsg(@RequestBody PublishMsg publishMsg) {
         System.out.println(publishMsg);
+        return driverService.publishOrder(publishMsg);
     }
     @PostMapping("/creatDriver")
     public AjaxMessage creatDriver(@RequestBody CommonQuery commonQuery) {
         Long userId = commonQuery.getUserId();
         UserDo userDo = userService.getUserById(userId);
-
+        if(userDo == null){
+            return AjaxMessage.error();
+        }
         driverService.creatDriver(commonQuery);
         return AjaxMessage.success();
     }
