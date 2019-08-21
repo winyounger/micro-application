@@ -4,6 +4,7 @@ import com.supconit.core.response.ResponseData;
 import com.supconit.query.SearchTripQuery;
 import com.supconit.service.CollectService;
 import com.supconit.service.DriverService;
+import com.supconit.service.OrderService;
 import com.supconit.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,8 @@ public class CourseController {
     private DriverService driverService;
     @Autowired
     private CollectService collectService;
+    @Autowired
+    private OrderService orderService;
 
     /**
      * 根据地址查找相关行程汇总数据
@@ -51,12 +54,8 @@ public class CourseController {
     @GetMapping("/getAllCourseTotal")
     public ResponseData getAllCourseTotal() {
         Map map = new HashMap<String, Object>();
-        map.put("city","杭州市");
-        map.put("sum",27);
-        map.put("id",1);
-        List<Map> list = new ArrayList<>();
-        list.add(map);
-        return new ResponseData(list);
+        map = orderService.getAllCourseTotal();
+        return new ResponseData(map);
     }
 
     /**

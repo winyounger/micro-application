@@ -5,6 +5,7 @@ import com.supconit.dao.domain.DriverDo;
 import com.supconit.dao.domain.PublishMsg;
 import com.supconit.dao.domain.PublishMsgAddress;
 import com.supconit.dao.dto.PublishMsgDto;
+import com.supconit.dao.dto.TotalDto;
 import com.supconit.query.SearchTripQuery;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,4 +26,6 @@ public interface DriverMapper {
     List<AddressInfo> getAddressInfoByMsgId(@Param("msgId") Long msgId);
 
     PublishMsgDto getById(@Param("id") Long id);
+
+    List<TotalDto> getAddressCountInfo();
 }

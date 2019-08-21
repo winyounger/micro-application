@@ -232,5 +232,15 @@
         AND id = #{id}
     </select>
 
+    <select id="getAddressCountInfo" resultType="com.supconit.dao.dto.TotalDto">
+        SELECT
+        district,count(1) total
+        FROM
+        `driver_publish_msg_address`
+        WHERE
+        is_delete = 0
+        group by district
+    </select>
+
 
 </mapper>
